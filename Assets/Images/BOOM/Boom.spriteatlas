@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Boom
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 8192
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: d4454b0c50d095a4e9b44b50241c11f3, type: 3}
+    - {fileID: 2800000, guid: 940fb8bdc0a4a1c4facba004d5f329ad, type: 3}
+    - {fileID: 2800000, guid: f013c08e89fc8de4987f636cc51bbda2, type: 3}
+    - {fileID: 2800000, guid: 575d2f67cc5a1c6498d7967a7e7b5720, type: 3}
+    - {fileID: 2800000, guid: 2666f6dba999d874fa7523fd0428a3b8, type: 3}
+    - {fileID: 2800000, guid: 20f6a7d742ced87438e8acc5acf4b231, type: 3}
+    - {fileID: 2800000, guid: 0326926ec269b0e4787ca88c6c9ee24d, type: 3}
+    - {fileID: 2800000, guid: c75730c251021b749adee9d1a89225ab, type: 3}
+    - {fileID: 2800000, guid: c6b6b97783a5b37479b20301a0e67078, type: 3}
+    - {fileID: 2800000, guid: 63529f1f98f53f94baba4ae06c972457, type: 3}
+    - {fileID: 2800000, guid: 96fd0b6450e9ff740bb05630ea221e19, type: 3}
+    - {fileID: 2800000, guid: 2661967a45a08c74e85637725e4b3219, type: 3}
+    - {fileID: 2800000, guid: d26479f43d0bf704db46d039bac4cd7b, type: 3}
+    - {fileID: 2800000, guid: 32a19478489e0a044a8e7f82d35792ee, type: 3}
+    - {fileID: 2800000, guid: eea4da3b2325ea24a985b8d022cb9e60, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c75730c251021b749adee9d1a89225ab, type: 3}
+  - {fileID: 21300000, guid: 96fd0b6450e9ff740bb05630ea221e19, type: 3}
+  - {fileID: 21300000, guid: d26479f43d0bf704db46d039bac4cd7b, type: 3}
+  - {fileID: 21300000, guid: 575d2f67cc5a1c6498d7967a7e7b5720, type: 3}
+  - {fileID: 21300000, guid: c6b6b97783a5b37479b20301a0e67078, type: 3}
+  - {fileID: 21300000, guid: 20f6a7d742ced87438e8acc5acf4b231, type: 3}
+  - {fileID: 21300000, guid: 32a19478489e0a044a8e7f82d35792ee, type: 3}
+  - {fileID: 21300000, guid: 2661967a45a08c74e85637725e4b3219, type: 3}
+  - {fileID: 21300000, guid: eea4da3b2325ea24a985b8d022cb9e60, type: 3}
+  - {fileID: 21300000, guid: 2666f6dba999d874fa7523fd0428a3b8, type: 3}
+  - {fileID: 21300000, guid: d4454b0c50d095a4e9b44b50241c11f3, type: 3}
+  - {fileID: 21300000, guid: 940fb8bdc0a4a1c4facba004d5f329ad, type: 3}
+  - {fileID: 21300000, guid: 0326926ec269b0e4787ca88c6c9ee24d, type: 3}
+  - {fileID: 21300000, guid: f013c08e89fc8de4987f636cc51bbda2, type: 3}
+  - {fileID: 21300000, guid: 63529f1f98f53f94baba4ae06c972457, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - BOOM-1-animation_07
+  - BOOM-1-animation_10
+  - BOOM-1-animation_12
+  - BOOM-1-animation_03
+  - BOOM-1-animation_08
+  - BOOM-1-animation_05
+  - BOOM-1-animation_13
+  - BOOM-1-animation_11
+  - BOOM-1-animation_14
+  - BOOM-1-animation_04
+  - BOOM-1-animation_00
+  - BOOM-1-animation_01
+  - BOOM-1-animation_06
+  - BOOM-1-animation_02
+  - BOOM-1-animation_09
+  m_RenderDataMap: {}
+  m_Tag: Boom
+  m_IsVariant: 0
