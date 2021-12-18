@@ -37,7 +37,7 @@ namespace CorePlugin.Logger
         [Conditional(EditorDefinition.Debug)] [Conditional(EditorDefinition.EnableReleaseLogs)]
         public static void Log(string message)
         {
-            Debug.Log(message);
+//            Debug.Log(message);
         }
 
         [Conditional(EditorDefinition.Debug)] [Conditional(EditorDefinition.EnableReleaseLogs)]

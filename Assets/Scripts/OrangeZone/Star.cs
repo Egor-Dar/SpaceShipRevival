@@ -9,7 +9,7 @@ namespace OrangeZone
     public class Star : MonoBehaviour, IPoolObject
     {
         [ReferencesHeader] 
-        [NotNull] [SerializeField] private Rigidbody2D rigidbody2D;
+       // [NotNull] [SerializeField] private Rigidbody2D rigidbody2D;
 
         [NotNull] [SerializeField] private SpriteRenderer spriteRenderer;
         [NotNull] [SerializeField] private CircleCollider2D circle;
@@ -27,7 +27,7 @@ namespace OrangeZone
 
         private void Reset()
         {
-            rigidbody2D = GetComponent<Rigidbody2D>();
+            //rigidbody2D = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             circle = GetComponent<CircleCollider2D>();
         }
@@ -45,7 +45,7 @@ namespace OrangeZone
         private void Update()
         {
             var position = transform.position + Vector3.left * speed * Time.deltaTime;
-            rigidbody2D.MovePosition(position);
+            GetComponent<Rigidbody2D>().MovePosition(position);
         }
 
         public void ResetState()

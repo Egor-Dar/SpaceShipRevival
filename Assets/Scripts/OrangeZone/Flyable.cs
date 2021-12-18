@@ -23,6 +23,7 @@ namespace OrangeZone
         [SerializeField] private protected Vector3 size;
         [SerializeField] private protected int order;
         [SerializeField] private protected float speed;
+        [SerializeField] private protected float currentSpeed;
         
         
         private protected bool markedForDie;

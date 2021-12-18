@@ -16,7 +16,7 @@ namespace OrangeZone
             if (other.TryGetComponent<IPoolObject>(out var poolObject))
             {
                 if (!(poolObject is Bullet)) return;
-                BulletsPool!.Invoke(poolObject);
+                BulletsPool?.Invoke(poolObject);
             }
         }
 

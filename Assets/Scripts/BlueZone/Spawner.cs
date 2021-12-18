@@ -63,8 +63,8 @@ namespace BlueZone
         }
 
         private protected virtual void OnRelease(IPoolObject poolObject)
-        {
-            ObjectPool.Release(poolObject);
+        { 
+            ObjectPool?.Release(poolObject);
         }
     }
 }

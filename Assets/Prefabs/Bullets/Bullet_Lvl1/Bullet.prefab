@@ -129,6 +129,7 @@ MonoBehaviour:
   size: {x: 3, y: 3, z: 0}
   order: 2
   speed: 50
+  currentSpeed: 0
 --- !u!95 &6149345604219096917
 Animator:
   serializedVersion: 3

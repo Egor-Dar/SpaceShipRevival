@@ -31,6 +31,7 @@ namespace BlueZone
         private event PlayerEvents.OnPlayerHealthRemove OnPlayerHealthRemove;
         private event PlayerEvents.OnPlayerHealthAdd OnPlayerHealthAdd;
         private event PlayerEvents.OnPlayerHealthChanged OnPlayerHealthChanged;
+        private event ScreenStateDelegates.Die Die;
 
         private Vector2 GetCurrentPlayerPosition()
         {
@@ -98,6 +99,7 @@ namespace BlueZone
 
         private void OnDestroy()
         {
+            
             EventInitializer.Unsubscribe(this);
         }
 

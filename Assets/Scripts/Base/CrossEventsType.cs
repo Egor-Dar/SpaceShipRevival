@@ -24,6 +24,7 @@ namespace Base
     public static class GeneralEvents
     {
         public delegate void GetScreenBound(Vector2 screenBounds);
+        public delegate void GetScreenSize(Vector3 screenSize);
     }
 
     public static class PoolDelegates
@@ -31,5 +32,13 @@ namespace Base
         public delegate void ReleasePoolObjectObstacles(IPoolObject poolObject);
 
         public delegate void ReleasePoolObjectBullets(IPoolObject poolObject);
+    }
+
+    public static class ScreenStateDelegates
+    {
+        public delegate void Play();
+        public delegate void Die();
+        public delegate void Pause();
+        public delegate void Setting();
     }
 }

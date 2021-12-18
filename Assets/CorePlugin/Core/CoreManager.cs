@@ -62,7 +62,6 @@ namespace CorePlugin.Core
         {
             foreach (var o in managers.Select(m => Instantiate(m, transform)))
             {
-                DebugLogger.Log($"Create manager: {o.name}");
                 if (!o.TryGetComponent(out ICore manager)) continue;
                 manager.InitializeElements();
             }
