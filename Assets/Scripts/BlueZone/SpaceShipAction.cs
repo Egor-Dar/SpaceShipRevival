@@ -99,7 +99,7 @@ namespace BlueZone
 
         private void OnDestroy()
         {
-            
+            Die!.Invoke();
             EventInitializer.Unsubscribe(this);
         }
 
@@ -138,6 +138,7 @@ namespace BlueZone
             EventExtensions.Subscribe(ref OnPlayerHealthChanged, subscribers);
             EventExtensions.Subscribe(ref OnPlayerHealthRemove, subscribers);
             EventExtensions.Subscribe(ref OnPlayerHealthAdd, subscribers);
+            EventExtensions.Subscribe(ref Die, subscribers);
         }
 
         public void Unsubscribe(params Delegate[] unsubscribers)
@@ -146,6 +147,8 @@ namespace BlueZone
             EventExtensions.Unsubscribe(ref OnPlayerHealthChanged, unsubscribers);
             EventExtensions.Unsubscribe(ref OnPlayerHealthRemove, unsubscribers);
             EventExtensions.Unsubscribe(ref OnPlayerHealthAdd, unsubscribers);
+            EventExtensions.Subscribe(ref Die, unsubscribers);
+
         }
     }
 }
