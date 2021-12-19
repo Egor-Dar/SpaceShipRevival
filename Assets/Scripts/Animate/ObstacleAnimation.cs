@@ -1,4 +1,5 @@
 ﻿using System;
+using Animate.Interfaces;
 using Base;
 using CorePlugin.Cross.Events.Interface;
 using UnityEngine;

@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @PlayerControll : IInputActionCollection, IDisposable
+namespace Input
 {
-    public InputActionAsset asset { get; }
-    public @PlayerControll()
+    public class @PlayerControll : IInputActionCollection, IDisposable
     {
-        asset = InputActionAsset.FromJson(@"{
+        public InputActionAsset asset { get; }
+        public @PlayerControll()
+        {
+            asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerControll"",
     ""maps"": [
         {
@@ -127,127 +129,128 @@ public class @PlayerControll : IInputActionCollection, IDisposable
         }
     ]
 }");
+            // PlayerControl
+            m_PlayerControl = asset.FindActionMap("PlayerControl", throwIfNotFound: true);
+            m_PlayerControl_Movement = m_PlayerControl.FindAction("Movement", throwIfNotFound: true);
+            m_PlayerControl_Attack = m_PlayerControl.FindAction("Attack", throwIfNotFound: true);
+            m_PlayerControl_ScreensControl = m_PlayerControl.FindAction("ScreensControl", throwIfNotFound: true);
+        }
+
+        public void Dispose()
+        {
+            UnityEngine.Object.Destroy(asset);
+        }
+
+        public InputBinding? bindingMask
+        {
+            get => asset.bindingMask;
+            set => asset.bindingMask = value;
+        }
+
+        public ReadOnlyArray<InputDevice>? devices
+        {
+            get => asset.devices;
+            set => asset.devices = value;
+        }
+
+        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+        public bool Contains(InputAction action)
+        {
+            return asset.Contains(action);
+        }
+
+        public IEnumerator<InputAction> GetEnumerator()
+        {
+            return asset.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Enable()
+        {
+            asset.Enable();
+        }
+
+        public void Disable()
+        {
+            asset.Disable();
+        }
+
         // PlayerControl
-        m_PlayerControl = asset.FindActionMap("PlayerControl", throwIfNotFound: true);
-        m_PlayerControl_Movement = m_PlayerControl.FindAction("Movement", throwIfNotFound: true);
-        m_PlayerControl_Attack = m_PlayerControl.FindAction("Attack", throwIfNotFound: true);
-        m_PlayerControl_ScreensControl = m_PlayerControl.FindAction("ScreensControl", throwIfNotFound: true);
-    }
-
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-
-    // PlayerControl
-    private readonly InputActionMap m_PlayerControl;
-    private IPlayerControlActions m_PlayerControlActionsCallbackInterface;
-    private readonly InputAction m_PlayerControl_Movement;
-    private readonly InputAction m_PlayerControl_Attack;
-    private readonly InputAction m_PlayerControl_ScreensControl;
-    public struct PlayerControlActions
-    {
-        private @PlayerControll m_Wrapper;
-        public PlayerControlActions(@PlayerControll wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_PlayerControl_Movement;
-        public InputAction @Attack => m_Wrapper.m_PlayerControl_Attack;
-        public InputAction @ScreensControl => m_Wrapper.m_PlayerControl_ScreensControl;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerControlActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerControlActions instance)
+        private readonly InputActionMap m_PlayerControl;
+        private IPlayerControlActions m_PlayerControlActionsCallbackInterface;
+        private readonly InputAction m_PlayerControl_Movement;
+        private readonly InputAction m_PlayerControl_Attack;
+        private readonly InputAction m_PlayerControl_ScreensControl;
+        public struct PlayerControlActions
         {
-            if (m_Wrapper.m_PlayerControlActionsCallbackInterface != null)
+            private @PlayerControll m_Wrapper;
+            public PlayerControlActions(@PlayerControll wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Movement => m_Wrapper.m_PlayerControl_Movement;
+            public InputAction @Attack => m_Wrapper.m_PlayerControl_Attack;
+            public InputAction @ScreensControl => m_Wrapper.m_PlayerControl_ScreensControl;
+            public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(PlayerControlActions set) { return set.Get(); }
+            public void SetCallbacks(IPlayerControlActions instance)
             {
-                @Movement.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnMovement;
-                @Attack.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAttack;
-                @ScreensControl.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnScreensControl;
-                @ScreensControl.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnScreensControl;
-                @ScreensControl.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnScreensControl;
-            }
-            m_Wrapper.m_PlayerControlActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
-                @ScreensControl.started += instance.OnScreensControl;
-                @ScreensControl.performed += instance.OnScreensControl;
-                @ScreensControl.canceled += instance.OnScreensControl;
+                if (m_Wrapper.m_PlayerControlActionsCallbackInterface != null)
+                {
+                    @Movement.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnMovement;
+                    @Movement.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnMovement;
+                    @Movement.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnMovement;
+                    @Attack.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAttack;
+                    @Attack.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAttack;
+                    @Attack.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAttack;
+                    @ScreensControl.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnScreensControl;
+                    @ScreensControl.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnScreensControl;
+                    @ScreensControl.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnScreensControl;
+                }
+                m_Wrapper.m_PlayerControlActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Movement.started += instance.OnMovement;
+                    @Movement.performed += instance.OnMovement;
+                    @Movement.canceled += instance.OnMovement;
+                    @Attack.started += instance.OnAttack;
+                    @Attack.performed += instance.OnAttack;
+                    @Attack.canceled += instance.OnAttack;
+                    @ScreensControl.started += instance.OnScreensControl;
+                    @ScreensControl.performed += instance.OnScreensControl;
+                    @ScreensControl.canceled += instance.OnScreensControl;
+                }
             }
         }
-    }
-    public PlayerControlActions @PlayerControl => new PlayerControlActions(this);
-    private int m_KeyboardSchemeIndex = -1;
-    public InputControlScheme KeyboardScheme
-    {
-        get
+        public PlayerControlActions @PlayerControl => new PlayerControlActions(this);
+        private int m_KeyboardSchemeIndex = -1;
+        public InputControlScheme KeyboardScheme
         {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
+            get
+            {
+                if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+                return asset.controlSchemes[m_KeyboardSchemeIndex];
+            }
         }
-    }
-    private int m_TouchPadSchemeIndex = -1;
-    public InputControlScheme TouchPadScheme
-    {
-        get
+        private int m_TouchPadSchemeIndex = -1;
+        public InputControlScheme TouchPadScheme
         {
-            if (m_TouchPadSchemeIndex == -1) m_TouchPadSchemeIndex = asset.FindControlSchemeIndex("TouchPad");
-            return asset.controlSchemes[m_TouchPadSchemeIndex];
+            get
+            {
+                if (m_TouchPadSchemeIndex == -1) m_TouchPadSchemeIndex = asset.FindControlSchemeIndex("TouchPad");
+                return asset.controlSchemes[m_TouchPadSchemeIndex];
+            }
         }
-    }
-    public interface IPlayerControlActions
-    {
-        void OnMovement(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
-        void OnScreensControl(InputAction.CallbackContext context);
+        public interface IPlayerControlActions
+        {
+            void OnMovement(InputAction.CallbackContext context);
+            void OnAttack(InputAction.CallbackContext context);
+            void OnScreensControl(InputAction.CallbackContext context);
+        }
     }
 }

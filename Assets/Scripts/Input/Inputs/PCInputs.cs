@@ -4,7 +4,7 @@ using CorePlugin.Cross.Events.Interface;
 using CorePlugin.Extensions;
 using UnityEngine;
 
-namespace Managers
+namespace Input.Inputs
 {
     public class PCInputs: MonoBehaviour, IEventHandler
     {

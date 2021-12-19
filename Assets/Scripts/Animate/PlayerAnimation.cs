@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Animate.Interfaces;
+using UnityEngine;
 
 namespace Animate
 {

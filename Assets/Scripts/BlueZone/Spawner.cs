@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Base;
 using CorePlugin.Cross.Events.Interface;
-using OrangeZone;
+using ObjectsSystem;
+using ObjectsSystem.ObjectBase.Interfaces;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
@@ -18,7 +19,7 @@ namespace BlueZone
 
         private protected ObjectPool<IPoolObject> ObjectPool;
         private protected Dictionary<Type, IPoolObject[]> PoolObjects;
-
+        
         private protected virtual void Start()
         {
             PoolObjects = new Dictionary<Type, IPoolObject[]>
@@ -37,6 +38,7 @@ namespace BlueZone
 
         private protected virtual void ActionOnRelease(IPoolObject obstacle)
         {
+            obstacle.OnRelease();
             obstacle.SetActive(false);
         }
 
@@ -52,6 +54,7 @@ namespace BlueZone
 
         private protected virtual void ActionOnGet(IPoolObject obstacle)
         {
+            obstacle.OnGet();
             obstacle.SetActive(true);
             obstacle.SetPosition(GetSpawnPosition());
             obstacle.ResetState();
@@ -64,6 +67,8 @@ namespace BlueZone
 
         private protected virtual void OnRelease(IPoolObject poolObject)
         { 
+            poolObject.ResetState();
+            if (poolObject.IsReleased) return;
             ObjectPool?.Release(poolObject);
         }
     }

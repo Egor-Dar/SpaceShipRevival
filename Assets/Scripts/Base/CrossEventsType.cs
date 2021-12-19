@@ -1,5 +1,6 @@
-using OrangeZone;
+using ObjectsSystem.ObjectBase.Interfaces;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 
 namespace Base
@@ -25,6 +26,7 @@ namespace Base
     {
         public delegate void GetScreenBound(Vector2 screenBounds);
         public delegate void GetScreenSize(Vector3 screenSize);
+        public delegate bool IsPaused();
     }
 
     public static class PoolDelegates
@@ -40,5 +42,6 @@ namespace Base
         public delegate void Die();
         public delegate void Pause();
         public delegate void Setting();
+        public delegate void Restart();
     }
 }

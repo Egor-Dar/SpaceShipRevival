@@ -5,7 +5,7 @@ using Base;
 using CorePlugin.Attributes.EditorAddons;
 using CorePlugin.Cross.Events.Interface;
 using CorePlugin.Extensions;
-using OrangeZone;
+using ObjectsSystem;
 using UnityEngine;
 
 namespace BlueZone

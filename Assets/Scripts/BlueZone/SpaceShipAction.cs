@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using Animate;
+using Animate.Interfaces;
 using Base;
 using CorePlugin.Attributes.EditorAddons;
 using CorePlugin.Core;
 using CorePlugin.Cross.Events.Interface;
 using CorePlugin.Extensions;
-using OrangeZone;
+using ObjectsSystem.ObjectBase.Interfaces;
 using UnityEngine;
 
 namespace BlueZone
@@ -31,6 +32,7 @@ namespace BlueZone
         private event PlayerEvents.OnPlayerHealthRemove OnPlayerHealthRemove;
         private event PlayerEvents.OnPlayerHealthAdd OnPlayerHealthAdd;
         private event PlayerEvents.OnPlayerHealthChanged OnPlayerHealthChanged;
+        private event ScreenStateDelegates.Play Play;
         private event ScreenStateDelegates.Die Die;
 
         private Vector2 GetCurrentPlayerPosition()
@@ -46,7 +48,7 @@ namespace BlueZone
 
         private int SetCurrentHealth
         {
-            set => currentHealth= Mathf.Clamp(value, 0, currentMaxHealth);
+            set => currentHealth = Mathf.Clamp(value, 0, currentMaxHealth);
             get => currentHealth;
         }
 
@@ -74,7 +76,7 @@ namespace BlueZone
         {
             _animatable.Run(dir);
             transform.Translate(dir * 5f * Time.deltaTime);
-            
+
             Vector2 viewPos = transform.position;
             viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + objectWidth, screenBounds.x - objectWidth);
             viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + objectHeight, screenBounds.y - objectHeight);
@@ -99,7 +101,6 @@ namespace BlueZone
 
         private void OnDestroy()
         {
-            Die!.Invoke();
             EventInitializer.Unsubscribe(this);
         }
 
@@ -111,6 +112,7 @@ namespace BlueZone
                 yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
             }
 
+            Die?.Invoke();
             Destroy(gameObject);
         }
 
@@ -118,7 +120,7 @@ namespace BlueZone
         {
             if (markedForDie) return;
             currentHealth -= damage;
-            OnPlayerHealthRemove!.Invoke(currentHealth,currentMaxHealth);
+            OnPlayerHealthRemove!.Invoke(currentHealth, currentMaxHealth);
             if (currentHealth <= 0)
             {
                 markedForDie = true;
@@ -129,7 +131,7 @@ namespace BlueZone
         public void InvokeEvents()
         {
             currentHealth = currentMaxHealth;
-            OnPlayerHealthChanged!.Invoke(currentMaxHealth,MaxHealth);
+            OnPlayerHealthChanged!.Invoke(currentMaxHealth, MaxHealth);
         }
 
         public void Subscribe(params Delegate[] subscribers)
@@ -138,6 +140,7 @@ namespace BlueZone
             EventExtensions.Subscribe(ref OnPlayerHealthChanged, subscribers);
             EventExtensions.Subscribe(ref OnPlayerHealthRemove, subscribers);
             EventExtensions.Subscribe(ref OnPlayerHealthAdd, subscribers);
+            EventExtensions.Subscribe(ref Play, subscribers);
             EventExtensions.Subscribe(ref Die, subscribers);
         }
 
@@ -147,8 +150,8 @@ namespace BlueZone
             EventExtensions.Unsubscribe(ref OnPlayerHealthChanged, unsubscribers);
             EventExtensions.Unsubscribe(ref OnPlayerHealthRemove, unsubscribers);
             EventExtensions.Unsubscribe(ref OnPlayerHealthAdd, unsubscribers);
-            EventExtensions.Subscribe(ref Die, unsubscribers);
-
+            EventExtensions.Unsubscribe(ref Play, unsubscribers);
+            EventExtensions.Unsubscribe(ref Die, unsubscribers);
         }
     }
 }

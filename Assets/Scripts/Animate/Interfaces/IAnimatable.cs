@@ -1,10 +1,6 @@
-﻿using System;
-using Base;
-using CorePlugin.Attributes.EditorAddons;
-using CorePlugin.Cross.Events.Interface;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Animate
+namespace Animate.Interfaces
 {
     public interface IAnimatable<in T>
     {
